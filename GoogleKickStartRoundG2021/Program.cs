@@ -7,43 +7,50 @@ namespace GoogleKickStartRoundG2021
     {
         static void Main(string[] args)
         {
-            List<int> intList = new List<int>();
-            List<string> strList = new List<string>();
-            Console.WriteLine( myMethod(intList ,strList));
+            int n, d, c, m, totalcount;
+            totalcount = Console.Read();
+            string str = "";
+            while (totalcount >0)
+            {
+                n = Console.Read();
+                d = Console.Read();
+                c = Console.Read();
+                m = Console.Read();
+                str = Console.ReadLine();
+                Console.WriteLine(myMethod(n, d, c, m,str));
+                totalcount--;
+            }
         }
-        //(intList[0],intList[1],intList[2],intList[3],strList)
-        //(int TotalAnimal, int dogPortion, int catPortion, int xtraCatPortion, string animals)
-        private static string myMethod(List<int> intList, List<string> queue)
+        private static string myMethod(int TotalAnimal,int dogPortion,int catPortion,int xtraCatPortion,string animals)
         {
             bool IsCatFed = false;
-            int constantCatportion = intList[3];
-            for(int i = 0; i < intList[0]; i++)
+            int constantCatportion = xtraCatPortion;
+            for(int i = 0; i < TotalAnimal; i++)
             {
-                string tempStr= queue[i];
-                if (tempStr[i] == 'D')
+                if (animals[i] == 'D')
                 {
                     if (IsCatFed)
                     {
-                        intList[3] = constantCatportion;
-                        intList[1]--;
+                        xtraCatPortion = constantCatportion;
+                        dogPortion--;
                     }
-                    else if (intList[1] < 0 || !IsCatFed)
+                    else if (dogPortion < 0 || !IsCatFed)
                     {
                         return "No";
                     }
                 }
-                if (tempStr[i] == 'C')
+                if (animals[i] == 'C')
                 {
-                    if (intList[2] > 0)
+                    if (catPortion > 0)
                     {
-                        intList[2]--;
+                        catPortion--;
                         IsCatFed = true;
                     }
                     else 
                     {
-                        if(intList[3] > 0)
+                        if(xtraCatPortion > 0)
                         {
-                            intList[3]--;
+                            xtraCatPortion--;
                             IsCatFed = true;
                         }
                         else
